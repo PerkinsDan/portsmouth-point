@@ -1,8 +1,8 @@
-import './globals.css'
+import '@/styles/globals.css'
 
 export const metadata = {
-  title: 'Portsmouth Point',
-  description: 'The official website of Portsmouth Point magazine',
+  title: 'Portsmouth Point - Admin',
+  description: 'Admin panel for Portsmouth Point magazine',
 }
 
 export default function RootLayout({
