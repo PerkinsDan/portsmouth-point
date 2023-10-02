@@ -23,15 +23,15 @@ export default async function Page({
         },
         list: {
             // Ex. 1: customizing common list types
-            bullet: ({ children }) => (
+            bullet: ({ children }: any) => (
                 <ul className="ml-10 list-disc">{children}</ul>
             ),
-            number: ({ children }) => (
+            number: ({ children }: any) => (
                 <ol className="ml-10 list-decimal">{children}</ol>
             ),
 
             // Ex. 2: rendering custom lists
-            checkmarks: ({ children }) => (
+            checkmarks: ({ children }: any) => (
                 <ol className="m-auto text-lg">{children}</ol>
             ),
         },
