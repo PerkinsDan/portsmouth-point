@@ -15,8 +15,9 @@ export default defineType({
             name: "slug",
             title: "Slug",
             type: "string",
-            initialValue: generateRandomSlug(),
-            hidden: true,
+            initialValue: () => generateRandomSlug(),
+            validation: (Rule) => Rule.required(),
+            // hidden: true,
         }),
         defineField({
             name: "author",
@@ -42,7 +43,7 @@ export default defineType({
             name: "publishedAt",
             title: "Published at",
             type: "date",
-            initialValue: new Date().toLocaleDateString("sv-SE"), // sv-SE matches the format of Sanity's date picker
+            initialValue: () => new Date().toLocaleDateString("sv-SE"), // sv-SE matches the format of Sanity's date picker
             hidden: true,
         }),
         defineField({

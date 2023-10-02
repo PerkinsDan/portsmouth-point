@@ -9,7 +9,11 @@ export const BlogList = ({ posts }: Props) => {
     return (
         <div className="grid grid-cols-4 gap-10 mx-auto my-20 w-max">
             {posts.map((post) => (
-                <div key={post._id} className="w-64 h-64">
+                <a
+                    key={post._id}
+                    className="w-64 h-64"
+                    href={"/posts/" + post.slug}
+                >
                     <Image
                         className="object-cover w-full h-1/2"
                         src={urlFor(post.mainImage).url()}
@@ -31,7 +35,7 @@ export const BlogList = ({ posts }: Props) => {
                             {new Date(post._createdAt).toLocaleDateString()}
                         </p>
                     </div>
-                </div>
+                </a>
             ))}
         </div>
     );
