@@ -3,7 +3,9 @@ import { BlogList } from "@/components/BlogList";
 import { groq } from "next-sanity";
 import { client } from "@/lib/sanity.client";
 
-const query = groq`
+async function HomePage() {
+    const revalidate = 10;
+    const query = groq`
     *[ _type == "post" ] {
         ...,
         author->,
@@ -11,9 +13,7 @@ const query = groq`
         "imageUrl": mainImage.asset->url,
     } | order(_createdAt desc)
     `;
-
-async function HomePage() {
-    const posts = await client.fetch(query);
+    const posts = await client.fetch(query, { next: { revalidate } });
     return (
         <div>
             <Banner />
@@ -24,4 +24,4 @@ async function HomePage() {
 
 export default HomePage;
 
-export const revalidate = 10; // revalidate at most every hour
+export const revalidate = 10;
