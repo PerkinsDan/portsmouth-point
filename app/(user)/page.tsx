@@ -23,3 +23,5 @@ async function HomePage() {
 }
 
 export default HomePage;
+
+export const revalidate = 10; // revalidate at most every hour
