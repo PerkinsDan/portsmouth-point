@@ -16,7 +16,7 @@ const SearchList = ({ posts }: Props) => {
                         <a
                             key={post._id}
                             className="w-full gap-5 pb-5 border-b"
-                            href={"/posts/" + post.slug}
+                            href={"/posts/" + post._id}
                         >
                             <div className="flex justify-between">
                                 <h2 className="text-sm font-bold line-clamp-1">
@@ -40,7 +40,7 @@ const SearchList = ({ posts }: Props) => {
                                         src={urlFor(post.mainImage).url()}
                                         height={170}
                                         width={254}
-                                        alt={post.description}
+                                        alt={post.title}
                                     />
                                 </div>
                                 <div className="text-sm w-fit">

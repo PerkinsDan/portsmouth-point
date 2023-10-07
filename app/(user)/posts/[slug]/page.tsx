@@ -1,15 +1,18 @@
+"use client";
 import { groq } from "next-sanity";
 import { client } from "@/lib/sanity.client";
 import Image from "next/image";
 import urlFor from "@/lib/urlFor";
-import { Key } from "react";
 import { PortableText } from "@portabletext/react";
+import { LikeButton } from "@/components/LikeButton";
+import { useEffect, useState } from "react";
 
-export default async function Page({
+export default function Page({
     params: { slug },
 }: {
     params: { slug: string };
 }) {
+    const [post, setPost] = useState<Post>();
     const portableTextComponents = {
         types: {
             image: ({ value }: any) => (
@@ -37,7 +40,7 @@ export default async function Page({
         },
     };
     const query = groq`
-    *[ _type == "post" && slug == $slug ][0] 
+    *[ _type == "post" && _id == $slug ][0] 
     {
         ...,
         author->,
@@ -46,38 +49,57 @@ export default async function Page({
     }
     `;
 
-    const post = await client.fetch(query, { slug });
+    useEffect(() => {
+        const getPost = async () => {
+            const data = await client.fetch(query, { slug });
+            setPost(data);
+        };
+
+        getPost();
+    }, [slug, query]);
 
     return (
-        <div className="max-w-2xl mx-auto">
-            <div>
-                <h1 className="py-10 text-4xl font-bold">{post.title}</h1>
-                <div className="flex justify-between px-5 ">
-                    <div className="flex items-center gap-5">
-                        <h3 className="text-xl underline">
-                            {post.author.name}
-                        </h3>
-                        <h3>{post.publishedAt}</h3>
+        <>
+            {post ? (
+                <div className="max-w-2xl mx-auto">
+                    <div className="pb-10">
+                        <h1 className="py-10 text-4xl font-bold">
+                            {post.title}
+                        </h1>
+                        <div className="flex justify-between px-5 ">
+                            <div className="flex items-center gap-5">
+                                <h3 className="text-xl underline">
+                                    {post.author.name}
+                                </h3>
+                                <h3>
+                                    {new Date(
+                                        post._createdAt
+                                    ).toLocaleDateString()}
+                                </h3>
+                            </div>
+                            <h3 className="text-xl font-bold text-red-700">
+                                {post.category.title}
+                            </h3>
+                        </div>
+                        <Image
+                            src={urlFor(post.mainImage).url()}
+                            alt={post.title}
+                            height={510}
+                            width={680}
+                            className="py-10"
+                        />
+                        <LikeButton postId={post._id} />
                     </div>
-                    <h3 className="text-xl font-bold text-red-700">
-                        {post.category.title}
-                    </h3>
+                    <div className="flex flex-col gap-5 break-words">
+                        <PortableText
+                            value={post.body}
+                            components={portableTextComponents}
+                        />
+                    </div>
                 </div>
-                <div></div>
-                <Image
-                    src={post.imageUrl}
-                    alt={post.title}
-                    height={510}
-                    width={680}
-                    className="py-10"
-                />
-            </div>
-            <div className="flex flex-col gap-5 break-words">
-                <PortableText
-                    value={post.body}
-                    components={portableTextComponents}
-                />
-            </div>
-        </div>
+            ) : (
+                <div>Loading</div>
+            )}
+        </>
     );
 }

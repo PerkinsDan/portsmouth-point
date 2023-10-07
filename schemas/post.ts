@@ -1,5 +1,4 @@
 import { defineField, defineType } from "sanity";
-import { generateRandomSlug } from "@/lib/generateRandomSlug";
 
 export default defineType({
     name: "post",
@@ -10,14 +9,6 @@ export default defineType({
             name: "title",
             title: "Title",
             type: "string",
-        }),
-        defineField({
-            name: "slug",
-            title: "Slug",
-            type: "string",
-            initialValue: () => generateRandomSlug(),
-            validation: (Rule) => Rule.required(),
-            // hidden: true,
         }),
         defineField({
             name: "author",
@@ -40,16 +31,16 @@ export default defineType({
             to: { type: "category" },
         }),
         defineField({
-            name: "publishedAt",
-            title: "Published at",
-            type: "date",
-            initialValue: () => new Date().toLocaleDateString("sv-SE"), // sv-SE matches the format of Sanity's date picker
-            hidden: true,
-        }),
-        defineField({
             name: "body",
             title: "Body",
             type: "blockContent",
+        }),
+        defineField({
+            name: "likes",
+            title: "Likes",
+            type: "number",
+            initialValue: 0,
+            hidden: true,
         }),
     ],
 
