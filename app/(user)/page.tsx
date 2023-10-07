@@ -1,11 +1,9 @@
-import Banner from "@/components/Banner";
-import { BlogList } from "@/components/BlogList";
+import Banner from "@/components/index/Banner";
+import { BlogList } from "@/components/index/BlogList";
 import { groq } from "next-sanity";
 import { client } from "@/lib/sanity.client";
 
-async function HomePage() {
-    const revalidate = 10;
-    const query = groq`
+const query = groq`
     *[ _type == "post" ] {
         ...,
         author->,
@@ -13,7 +11,10 @@ async function HomePage() {
         "imageUrl": mainImage.asset->url,
     } | order(_createdAt desc)
     `;
-    const posts = await client.fetch(query, { next: { revalidate } });
+
+async function HomePage() {
+    const posts = await client.fetch<Post[]>(query);
+
     return (
         <div>
             <Banner />

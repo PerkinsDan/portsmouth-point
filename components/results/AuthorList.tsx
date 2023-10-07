@@ -1,6 +1,11 @@
-export const AuthorList = ({ authors }: { authors: Author[] }) => {
+type Props = {
+    authors: Author[];
+};
+
+export const AuthorList = ({ authors }: Props) => {
     return (
-        <>
+        <div>
+            <h3 className="py-4 text-lg font-bold">Authors:</h3>
             {authors.length === 0 ? (
                 <p>No results found</p>
             ) : (
@@ -12,6 +17,6 @@ export const AuthorList = ({ authors }: { authors: Author[] }) => {
                     </ul>
                 </div>
             )}
-        </>
+        </div>
     );
 };

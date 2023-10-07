@@ -10,11 +10,11 @@ const links = [
     { href: "/about", label: "What's The Point?" },
 ];
 
-function Navbar() {
+export const Navbar = () => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <nav className="flex flex-wrap justify-between items-center p-6 font-serif">
+        <nav className="flex flex-wrap items-center justify-between p-6 font-serif">
             <div className="flex items-center flex-shrink-0 mr-6">
                 <Link href="/" className="text-lg font-bold hover:text-red-700">
                     PORTSMOUTH POINT
@@ -22,10 +22,10 @@ function Navbar() {
             </div>
             <div className="block lg:hidden">
                 <button
-                    className="flex items-center px-3 py-2 rounded text-red-700"
+                    className="flex items-center px-3 py-2 text-red-700 rounded"
                     onClick={() => setIsExpanded(!isExpanded)}
                 >
-                    <Bars3Icon className="h-6 w-6" />
+                    <Bars3Icon className="w-6 h-6" />
                 </button>
             </div>
             <div
@@ -39,7 +39,7 @@ function Navbar() {
                     <Link
                         key={href}
                         href={href}
-                        className="block mt-4 lg:inline-block lg:mt-0 mr-12 hover:text-red-700"
+                        className="block mt-4 mr-12 lg:inline-block lg:mt-0 hover:text-red-700"
                     >
                         {label}
                     </Link>
@@ -47,6 +47,6 @@ function Navbar() {
             </div>
         </nav>
     );
-}
+};
 
 export default Navbar;

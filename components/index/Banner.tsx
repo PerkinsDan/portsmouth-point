@@ -1,10 +1,9 @@
 "use client";
-
 import { useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 
-function Banner() {
+const Banner = () => {
     const router = useRouter();
     const [search, setSearch] = useState("");
 
@@ -37,6 +36,6 @@ function Banner() {
             </div>
         </div>
     );
-}
+};
 
 export default Banner;

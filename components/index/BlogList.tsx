@@ -1,6 +1,7 @@
 import Image from "next/image";
 import urlFor from "@/lib/urlFor";
 import { HeartIcon } from "@heroicons/react/24/outline";
+import { GetDate } from "../GetDate";
 
 type Props = {
     posts: Post[];
@@ -34,11 +35,9 @@ export const BlogList = ({ posts }: Props) => {
                                 <p className="mt-2 text-sm font-light">
                                     {post.author.name}
                                 </p>
-                                <p className="text-sm font-light">
-                                    {new Date(
-                                        post._createdAt
-                                    ).toLocaleDateString()}
-                                </p>
+                                <div className="text-sm font-light">
+                                    <GetDate date={post._createdAt} />
+                                </div>
                             </div>
                             <div className="relative flex items-center justify-center">
                                 <HeartIcon className="absolute text-gray-400 w-7 h-7" />

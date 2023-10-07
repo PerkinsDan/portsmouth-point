@@ -6,11 +6,11 @@ export const metadata = {
     description: "The official website of Portsmouth Point magazine",
 };
 
-export default function RootLayout({
-    children,
-}: {
+type Props = {
     children: React.ReactNode;
-}) {
+};
+
+export default function RootLayout({ children }: Props) {
     return (
         <html lang="en">
             <body>
