@@ -15,7 +15,7 @@ const query = groq`
         category->,
         "imageUrl": mainImage.asset->url,
     }
-    `;
+`;
 
 type Props = {
     params: {
@@ -23,8 +23,10 @@ type Props = {
     };
 };
 
-export default async function Page({ params: { slug } }: Props) {
-    const post = await client.fetch(query, { slug });
+export default async function Page({ params }: Props) {
+    const { slug } = params;
+
+    const post = await client.fetch<Post>(query, { slug });
 
     if (!post) {
         return (
@@ -34,32 +36,49 @@ export default async function Page({ params: { slug } }: Props) {
         );
     }
 
+    const { title, body, _createdAt, author, category, mainImage } = post;
+    const imageUrl = urlFor(post.mainImage).url();
+
     return (
         <div className="max-w-2xl mx-auto">
             <div className="pb-10">
-                <h1 className="py-10 text-4xl font-bold">{post.title}</h1>
+                <h1 className="py-10 text-4xl font-bold">{title}</h1>
                 <div className="flex justify-between px-5 ">
                     <div className="flex items-center gap-5">
-                        <h3 className="text-xl underline">
-                            {post.author.name}
-                        </h3>
-                        <GetDate date={post._createdAt} />
+                        <h3 className="text-xl underline">{author.name}</h3>
+                        <GetDate date={_createdAt} />
                     </div>
                     <h3 className="text-xl font-bold text-red-700">
-                        {post.category.title}
+                        {category.title}
                     </h3>
                 </div>
                 <Image
-                    src={urlFor(post.mainImage).url()}
-                    alt={post.title}
+                    src={imageUrl}
+                    alt={title}
                     height={510}
                     width={680}
                     className="py-10"
                     priority
                 />
-                <LikeButton postId={post._id} />
+                <LikeButton postId={slug} />
             </div>
-            <PostBody body={post.body} />
+            <PostBody body={body} />
         </div>
     );
 }
+
+export async function generateStaticParams() {
+    const slugQuery = groq`
+        *[ _type == "post" ] {
+            _id
+        } 
+    `;
+
+    const posts = await client.fetch<Post[]>(slugQuery);
+
+    return posts.map((post) => ({
+        slug: post._id,
+    }));
+}
+
+export const revalidate = 10;
