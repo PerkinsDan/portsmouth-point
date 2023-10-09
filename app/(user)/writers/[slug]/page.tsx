@@ -1,4 +1,4 @@
-import { PostList } from "@/components/results/PostList";
+import { PostList } from "@/components/writers/PostList";
 import { client } from "@/lib/sanity.client";
 import { groq } from "next-sanity";
 
@@ -19,6 +19,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
     return (
         <div className="max-w-2xl mx-auto">
+            <h1 className="text-3xl underline">{writer}</h1>
             <PostList posts={posts} />
         </div>
     );
