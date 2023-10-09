@@ -7,6 +7,11 @@ type Props = {
 };
 
 export const PostList = ({ posts }: Props) => {
+    const description = posts[0].body
+        .map((block) => block.children[0].text)
+        .join(" ")
+        .slice(0, 400);
+
     return (
         <div>
             <h3 className="py-4 text-lg font-bold">Posts:</h3>
@@ -46,7 +51,7 @@ export const PostList = ({ posts }: Props) => {
                                     </div>
                                     <div className="text-sm w-fit">
                                         <p className="line-clamp-5">
-                                            {post.body[0].children[0].text}
+                                            {description}
                                         </p>
                                     </div>
                                 </div>
