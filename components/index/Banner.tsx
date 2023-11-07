@@ -13,10 +13,7 @@ const Banner = () => {
                 Portsmouth Point
             </h1>
             <h3 className="my-8 font-serif font-semibold">
-                The official blog of the{" "}
-                <span className="underline underline-offset-2 decoration-2 decoration-red-700">
-                    Portsmouth Point
-                </span>
+                The official blog of the Portsmouth Point
                 <br /> PGS<span>&apos;</span>s magazine of ideas and culture
             </h3>
             <div>

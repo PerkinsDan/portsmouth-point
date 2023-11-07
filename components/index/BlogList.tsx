@@ -9,7 +9,7 @@ type Props = {
 
 export const BlogList = ({ posts }: Props) => {
     return (
-        <div className="grid grid-cols-4 gap-10 mx-auto my-20 w-max">
+        <div className="grid grid-cols-4 gap-10 mx-auto my-10 w-max">
             {posts.map((post) => (
                 <a
                     key={post._id}
@@ -23,13 +23,15 @@ export const BlogList = ({ posts }: Props) => {
                         width={254}
                         alt={post.title}
                     />
-                    <div className="py-2">
-                        <h2 className="text-sm font-bold line-clamp-1">
-                            {post.title}
-                        </h2>
-                        <p className="text-sm line-clamp-2">
-                            {post.body[0].children[0].text}
-                        </p>
+                    <div className="flex flex-col justify-between py-2 h-1/2">
+                        <div>
+                            <h2 className="text-sm font-bold line-clamp-1">
+                                {post.title}
+                            </h2>
+                            <p className="text-sm line-clamp-2">
+                                {post.body[0].children[0].text}
+                            </p>
+                        </div>
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="mt-2 text-sm font-light">
@@ -39,7 +41,7 @@ export const BlogList = ({ posts }: Props) => {
                                     <GetDate date={post._createdAt} />
                                 </div>
                             </div>
-                            <div className="relative flex items-center justify-center">
+                            <div className="relative flex items-center justify-center w-7 h-7">
                                 <HeartIcon className="absolute text-gray-400 w-7 h-7" />
                                 <p className="text-sm">{post.likes}</p>
                             </div>
