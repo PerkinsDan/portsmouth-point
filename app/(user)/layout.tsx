@@ -27,6 +27,8 @@ export default function RootLayout({ children }: Props) {
                     <ThemeSwitcher />
                     <main>{children}</main>
                 </ThemeProvider>
+                <Navbar />
+                {children}
             </body>
         </html>
     );
