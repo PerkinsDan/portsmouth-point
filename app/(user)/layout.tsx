@@ -19,7 +19,7 @@ export default function RootLayout({ children }: Props) {
     return (
         <html lang="en">
             <head>
-                <style>{`.bg-slate-50 { background-color: slategray; }`}</style>
+                <style>{`.bg-slate-50 { background-color: black; }`}</style>
                 <style>{`.dark { color: white; }`}</style>
             </head>
             <body className={`bg-slate-50 dark ${switchThemeDuration}`}>

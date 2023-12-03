@@ -9,15 +9,16 @@ type Props = {
 
 export const BlogList = ({ posts }: Props) => {
     return (
-        <div className="grid grid-cols-4 gap-10 mx-auto my-20 w-max">
+        <div className="grid grid-cols-4 gap-5 mx-auto my-20 w-max">
+
             {posts.map((post) => (
                 <a
                     key={post._id}
-                    className="w-64 h-64"
+                    className="w-64 h-64 rounded-lg p-3 bg-gray-800 bg-opacity-50"
                     href={"/posts/" + post._id}
                 >
                     <Image
-                        className="object-cover w-full h-1/2"
+                        className="object-cover w-full h-1/2 rounded-lg"
                         src={urlFor(post.mainImage).url()}
                         height={170}
                         width={254}
