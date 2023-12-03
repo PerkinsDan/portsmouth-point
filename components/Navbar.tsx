@@ -3,6 +3,7 @@
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 const links = [
     { href: "/writers", label: "Writers" },
@@ -20,6 +21,7 @@ export const Navbar = () => {
                     PORTSMOUTH POINT
                 </Link>
             </div>
+            <ThemeSwitcher></ThemeSwitcher>
             <div className="block lg:hidden">
                 <button
                     className="flex items-center px-3 py-2 text-red-700 rounded"
