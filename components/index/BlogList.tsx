@@ -9,7 +9,7 @@ type Props = {
 
 export const BlogList = ({ posts }: Props) => {
     return (
-        <div className="grid grid-cols-4 gap-10 mx-auto my-10 w-max">
+        <div className="grid gap-10 mx-auto my-10 xl:grid-cols-4 sm:grid-cols-2 w-max">
             {posts.map((post) => (
                 <a
                     key={post._id}
