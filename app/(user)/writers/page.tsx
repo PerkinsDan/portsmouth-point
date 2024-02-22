@@ -37,13 +37,14 @@ export default async function Page() {
     const sortedWriters = sortWriters(writers);
 
     return (
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-2xl mx-5 md:mx-auto">
             <h1 className="text-2xl">Writers:</h1>
             {sortedWriters.map((writerList: any, index) => (
                 <div key={index} className="py-2 border-b">
                     <h3 className="font-bold">{writerList[0].name[0]}</h3>
                     {writerList.map((writer: Author) => (
                         <a
+                            className="hover:text-blue-600"
                             key={writer._id}
                             href={`/writers/${writer.name.replace(" ", "-")}`}
                         >
