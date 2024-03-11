@@ -1,10 +1,11 @@
-'use client'
+import { Studio } from "./Studio";
 
-import { NextStudio } from 'next-sanity/studio'
+// Ensures the Studio route is statically generated
+export const dynamic = "force-static";
 
-import config from '@/sanity.config'
+// Set the right `viewport`, `robots` and `referer` meta tags
+export { metadata, viewport } from "next-sanity/studio";
 
 export default function StudioPage() {
-    //  Supports the same props as `import {Studio} from 'sanity'`, `config` is required
-    return <NextStudio config={config} />
+    return <Studio />;
 }
