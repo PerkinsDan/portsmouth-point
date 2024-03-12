@@ -1,5 +1,6 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { GoogleProfile } from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -10,10 +11,11 @@ export const authOptions: NextAuthOptions = {
     ],
     callbacks: {
         async signIn({ account, profile }) {
+            const userProfile = profile as GoogleProfile;
             if (account?.provider === "google") {
                 return (
-                    profile.email_verified &&
-                    profile.email.endsWith("@pgs.org.uk")
+                    userProfile.email_verified &&
+                    userProfile.email.endsWith("@pgs.org.uk")
                 );
             }
             return true; // Do different verification for other providers that don't have `email_verified`
