@@ -1,5 +1,8 @@
 import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]/authOptions";
+import SignIn from "@/components/index/SignIn";
 
 export const metadata = {
     title: "Portsmouth Point",
@@ -10,12 +13,15 @@ type Props = {
     children: React.ReactNode;
 };
 
-export default function RootLayout({ children }: Props) {
+export default async function RootLayout({ children }: Props) {
+    const session = await getServerSession(authOptions);
+
     return (
         <html lang="en">
             <body>
                 <Navbar />
-                {children}
+
+                {session ? <div>{children}</div> : <SignIn />}
             </body>
         </html>
     );
