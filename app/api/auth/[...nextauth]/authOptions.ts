@@ -21,4 +21,8 @@ export const authOptions: NextAuthOptions = {
             return true; // Do different verification for other providers that don't have `email_verified`
         },
     },
+    pages: {
+        signIn: "/",
+        error: "/", // Error code passed in query string as ?error=
+    },
 };

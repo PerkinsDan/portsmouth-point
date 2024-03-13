@@ -1,9 +1,19 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 const SignIn = () => {
     const [clicked, setClicked] = useState(false);
+    const searchParams = useSearchParams();
+
+    const error = searchParams.get("error");
+
+    let errorStyles = "hidden";
+
+    if (error == "AccessDenied") {
+        errorStyles = "";
+    }
 
     const handleClick = () => {
         signIn("google");
@@ -14,7 +24,10 @@ const SignIn = () => {
 
     return (
         <main className="flex flex-col justify-center max-w-2xl gap-10 p-10 mx-auto mt-20 text-center border border-red-600 rounded w-fit">
-            You need to sign in to access this site
+            <p>You need to sign in to access this site</p>
+            <p className={`font-bold text-red-500 ${errorStyles}`}>
+                You must use your PGS account to access this site
+            </p>
             <button
                 onClick={handleClick}
                 aria-label="Sign in with Google"
