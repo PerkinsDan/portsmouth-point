@@ -11,8 +11,6 @@ export const BlogList = ({ posts }: Props) => {
     return (
         <div className="grid gap-10 mx-auto my-10 xl:grid-cols-4 sm:grid-cols-2 w-max">
             {posts.map((post) => {
-                console.log(post.title);
-                console.log(urlFor(post.mainImage).url());
                 return (
                     <a
                         key={post._id}
