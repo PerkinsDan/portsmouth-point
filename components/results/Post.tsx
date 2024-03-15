@@ -33,18 +33,16 @@ const Post = ({ post }: Props) => {
                     )}
                 </div>
             </div>
-            <div className="flex gap-5">
-                <div className="w-64 aspect-video">
-                    <Image
-                        className="object-cover w-full h-full"
-                        src={urlFor(post.mainImage).url()}
-                        height={170}
-                        width={254}
-                        alt={post.title}
-                    />
-                </div>
-                <div className="text-sm w-fit">
-                    <p className="line-clamp-5">{toPlainText(post.body)}</p>
+            <div className="grid grid-cols-3 gap-5">
+                <Image
+                    className="object-cover w-full aspect-video"
+                    src={urlFor(post.mainImage).url() || ""}
+                    height={170}
+                    width={254}
+                    alt={post.title}
+                />
+                <div className="w-full col-span-2 text-sm">
+                    <p className="line-clamp-6">{toPlainText(post.body)}</p>
                 </div>
             </div>
         </a>
