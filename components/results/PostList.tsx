@@ -1,17 +1,10 @@
-import Image from "next/image";
-import { GetDate } from "@/components/GetDate";
-import urlFor from "@/lib/urlFor";
+import Post from "./Post";
 
 type Props = {
     posts: Post[];
 };
 
 export const PostList = ({ posts }: Props) => {
-    const description = posts[0].body
-        .map((block) => block.children[0].text)
-        .join(" ")
-        .slice(0, 400);
-
     return (
         <div>
             <h3 className="py-4 text-lg font-bold">Posts:</h3>
@@ -21,41 +14,7 @@ export const PostList = ({ posts }: Props) => {
                 ) : (
                     <>
                         {posts.map((post) => (
-                            <a
-                                key={post._id}
-                                className="w-full gap-5 pb-5 border-b"
-                                href={"/posts/" + post._id}
-                            >
-                                <div className="flex justify-between">
-                                    <h2 className="text-sm font-bold line-clamp-1">
-                                        {post.title}
-                                    </h2>
-                                    <div className="text-right">
-                                        <p className="text-sm font-light">
-                                            {post.author.name}
-                                        </p>
-                                        <div className="text-sm font-light">
-                                            <GetDate date={post._createdAt} />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="flex gap-5">
-                                    <div className="w-64 aspect-video">
-                                        <Image
-                                            className="object-cover w-full h-full"
-                                            src={urlFor(post.mainImage).url()}
-                                            height={170}
-                                            width={254}
-                                            alt={post.title}
-                                        />
-                                    </div>
-                                    <div className="text-sm w-fit">
-                                        <p className="line-clamp-5">
-                                            {description}
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
+                            <Post key={post._id} post={post} />
                         ))}
                     </>
                 )}

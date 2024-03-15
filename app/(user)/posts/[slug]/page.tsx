@@ -37,7 +37,7 @@ export default async function Page({ params }: Props) {
     }
 
     const { title, body, _createdAt, author, category, mainImage } = post;
-    const imageUrl = urlFor(post.mainImage).url();
+    const imageUrl = urlFor(mainImage).url();
 
     return (
         <div className="max-w-2xl mx-auto">
@@ -45,7 +45,12 @@ export default async function Page({ params }: Props) {
                 <h1 className="py-10 text-4xl font-bold">{title}</h1>
                 <div className="flex justify-between px-5 ">
                     <div className="flex items-center gap-5">
-                        <h3 className="text-xl underline">{author.name}</h3>
+                        <a
+                            className="text-xl underline"
+                            href={`/writers/${author.name.replace(" ", "-")}`}
+                        >
+                            {author.name}
+                        </a>
                         <GetDate date={_createdAt} />
                     </div>
                     <h3 className="text-xl font-bold text-red-700">

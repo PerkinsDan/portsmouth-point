@@ -1,10 +1,11 @@
-import { PostList } from "@/components/writers/PostList";
+import { PostList } from "@/components/results/PostList";
 import { client } from "@/lib/sanity.client";
 import { groq } from "next-sanity";
 
 const query = groq`
     *[ _type == "post" && author->name == $writer ] {
         ...,
+        author->,
         category->,
         "imageUrl": mainImage.asset->url,
     } | order(_createdAt desc)

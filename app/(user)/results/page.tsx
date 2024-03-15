@@ -6,8 +6,9 @@ import { Loader } from "@/components/Loader";
 import { AuthorList } from "@/components/results/AuthorList";
 import { PostList } from "@/components/results/PostList";
 import { FilterButtons } from "@/components/results/FilterButtons";
+import groq from "groq";
 
-const queryPosts = `
+const queryPosts = groq`
         *[ _type == "post" && title match $words][0..20] {
             ...,
             author->,
@@ -16,7 +17,7 @@ const queryPosts = `
         }
     `;
 
-const queryAuthor = `
+const queryAuthor = groq`
         *[ _type == "author" && name match $words][0..20] {
             name,
         }
@@ -29,7 +30,7 @@ export default function Page() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [filters, setFilters] = useState<string[]>([]);
 
-    const search = searchParams.get("search")?.split(" ") || [""];
+    const search = searchParams.get("search")?.trim().split(" ") || [""];
     const words = search.map((word) => `${word}*`);
 
     useEffect(() => {
@@ -52,15 +53,14 @@ export default function Page() {
         );
     }
 
+    <>
+        <h1>
+            No results found for: <b>{search.join(" ")}</b>
+        </h1>
+    </>;
     return (
         <div className="max-w-2xl mx-auto">
-            {posts.length === 0 && authors.length === 0 ? (
-                <>
-                    <h1>
-                        No results found for: <b>{search.join(" ")}</b>
-                    </h1>
-                </>
-            ) : (
+            {posts.length > 0 && authors.length > 0 ? (
                 <>
                     <h1>
                         Results for: <b>{search.join(" ")}</b>
@@ -79,6 +79,28 @@ export default function Page() {
                             {filters.includes("authors") && (
                                 <AuthorList authors={authors} />
                             )}
+                        </>
+                    )}
+                </>
+            ) : (
+                <>
+                    {posts.length > 0 ? (
+                        <PostList posts={posts} />
+                    ) : (
+                        <>
+                            <h1>
+                                No posts found for: <b>{search.join(" ")}</b>
+                            </h1>
+                        </>
+                    )}
+                    <hr />
+                    {authors.length > 0 ? (
+                        <AuthorList authors={authors} />
+                    ) : (
+                        <>
+                            <h1>
+                                No authors found for: <b>{search.join(" ")}</b>
+                            </h1>
                         </>
                     )}
                 </>
