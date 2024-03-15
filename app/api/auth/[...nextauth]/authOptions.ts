@@ -15,7 +15,10 @@ export const authOptions: NextAuthOptions = {
             if (account?.provider === "google") {
                 return (
                     userProfile.email_verified &&
-                    userProfile.email.endsWith("@pgs.org.uk")
+                    (userProfile.email.endsWith("@pgs.org.uk") ||
+                        process.env.EMAIL_WHITELIST!.includes(
+                            userProfile.email
+                        ))
                 );
             }
             return true; // Do different verification for other providers that don't have `email_verified`
