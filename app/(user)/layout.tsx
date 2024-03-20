@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import SignIn from "@/components/index/SignIn";
+import Footer from "@/components/Footer";
 
 export const metadata = {
     title: "Portsmouth Point",
@@ -22,6 +23,7 @@ export default async function RootLayout({ children }: Props) {
                 <Navbar />
 
                 {session ? <div>{children}</div> : <SignIn />}
+                <Footer />
             </body>
         </html>
     );
