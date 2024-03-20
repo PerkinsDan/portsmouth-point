@@ -12,7 +12,16 @@ export const AuthorList = ({ authors }: Props) => {
                 <div>
                     <ul>
                         {authors.map((author) => (
-                            <li key={author._id}>{author.name}</li>
+                            <li key={author._id}>
+                                <a
+                                    href={`/writers/${author.name.replace(
+                                        " ",
+                                        "-"
+                                    )}`}
+                                >
+                                    {author.name}
+                                </a>
+                            </li>
                         ))}
                     </ul>
                 </div>
