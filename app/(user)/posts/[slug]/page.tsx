@@ -51,7 +51,10 @@ export default async function Page({ params }: Props) {
                         >
                             {author.name}
                         </a>
-                        <GetDate date={_createdAt} />
+                        <div className="pr-4 border-r-2 border-black">
+                            <GetDate date={_createdAt} />
+                        </div>
+                        <p>Likes: {post.likes}</p>
                     </div>
                     <h3 className="text-xl font-bold text-red-700">
                         {category.title}
