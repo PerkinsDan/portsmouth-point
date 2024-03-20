@@ -35,7 +35,7 @@ type Props = {
 
 export const PostBody = ({ body }: Props) => {
     return (
-        <main className="flex flex-col gap-5 break-words">
+        <main className="flex flex-col gap-5 text-justify break-words">
             <PortableText value={body} components={components} />
         </main>
     );
