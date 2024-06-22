@@ -25,9 +25,15 @@ export default async function RootLayout({ children }: Props) {
                 <div>
                     <Navbar />
 
-                    {session ? <div>{children}</div> : <SignIn />}
-                    {process.env.ADMIN_LIST?.includes(email) && (
-                        <StudioButton />
+                    {session ? (
+                        <div>
+                            {children}{" "}
+                            {process.env.ADMIN_LIST?.includes(email) && (
+                                <StudioButton />
+                            )}
+                        </div>
+                    ) : (
+                        <SignIn />
                     )}
                 </div>
                 <Footer />
