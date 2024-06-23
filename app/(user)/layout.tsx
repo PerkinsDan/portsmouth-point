@@ -36,6 +36,12 @@ export default async function RootLayout({ children }: Props) {
                         <SignIn />
                     )}
                 </div>
+                <a
+                    className="sticky px-5 py-3 -rotate-90 border border-red-700 rounded bottom-20 w-max"
+                    href="http://www.portsmouthpoint.blogspot.com"
+                >
+                    Go to old site
+                </a>
                 <Footer />
             </body>
         </html>
