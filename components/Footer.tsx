@@ -3,7 +3,7 @@ const Footer = () => {
     const year = date.getFullYear();
 
     return (
-        <div className="w-full mt-10 text-center bg-slate-100">
+        <div className="absolute bottom-0 w-full mt-10 text-center bg-slate-100">
             Portsmouth Point ©{year}
         </div>
     );

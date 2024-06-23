@@ -8,6 +8,10 @@ const links = [
     { href: "/writers", label: "Writers" },
     { href: "/contact", label: "Contact" },
     { href: "/about", label: "What's The Point?" },
+    {
+        href: "https://portsmouthpoint.blogspot.com/",
+        label: "Archive",
+    },
 ];
 
 export const Navbar = () => {

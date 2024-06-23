@@ -21,27 +21,19 @@ export default async function RootLayout({ children }: Props) {
 
     return (
         <html lang="en">
-            <body className="flex flex-col justify-between min-h-screen">
-                <div>
-                    <Navbar />
+            <body className="relative flex flex-col justify-between min-h-screen">
+                <Navbar />
 
-                    {session ? (
-                        <div>
-                            {children}{" "}
-                            {process.env.ADMIN_LIST?.includes(email) && (
-                                <StudioButton />
-                            )}
-                        </div>
-                    ) : (
-                        <SignIn />
-                    )}
-                </div>
-                <a
-                    className="sticky px-5 py-3 -rotate-90 border border-red-700 rounded bottom-20 w-max"
-                    href="http://www.portsmouthpoint.blogspot.com"
-                >
-                    Go to old site
-                </a>
+                {session ? (
+                    <div>
+                        {children}{" "}
+                        {process.env.ADMIN_LIST?.includes(email) && (
+                            <StudioButton />
+                        )}
+                    </div>
+                ) : (
+                    <SignIn />
+                )}
                 <Footer />
             </body>
         </html>
