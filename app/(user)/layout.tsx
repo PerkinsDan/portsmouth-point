@@ -22,18 +22,20 @@ export default async function RootLayout({ children }: Props) {
     return (
         <html lang="en">
             <body className="relative flex flex-col justify-between min-h-screen">
-                <Navbar />
+                <div>
+                    <Navbar />
 
-                {session ? (
-                    <div>
-                        {children}{" "}
-                        {process.env.ADMIN_LIST?.includes(email) && (
-                            <StudioButton />
-                        )}
-                    </div>
-                ) : (
-                    <SignIn />
-                )}
+                    {session ? (
+                        <div>
+                            {children}{" "}
+                            {process.env.ADMIN_LIST?.includes(email) && (
+                                <StudioButton />
+                            )}
+                        </div>
+                    ) : (
+                        <SignIn />
+                    )}
+                </div>
                 <Footer />
             </body>
         </html>
