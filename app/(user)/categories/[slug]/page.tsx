@@ -14,7 +14,7 @@ const query = groq`
 export default async function Page({ params }: { params: { slug: string } }) {
     const { slug } = params;
 
-    const category = slug.replace("%20", "&");
+    const category = slug.replaceAll("%20", " ").replaceAll("%26", "&");
 
     const posts = await client.fetch<Post[]>(query, { category });
 

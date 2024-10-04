@@ -20,12 +20,11 @@ const sortCategories = (categories: Category[]) => {
 
         if (firstLetter === currentLetter) {
             currentList.push(category);
-            return;
+        } else {
+            sortedCategories.push(currentList);
+            currentList = [category];
+            currentLetter = firstLetter;
         }
-
-        sortedCategories.push(currentList);
-        currentList = [category];
-        currentLetter = firstLetter;
     });
 
     return sortedCategories;
