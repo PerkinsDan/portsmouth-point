@@ -36,7 +36,7 @@ export default async function RootLayout({ children }: Props) {
                         <SignIn />
                     )}
                 </div>
-                <Footer />
+{/*                 <Footer /> */}
             </body>
         </html>
     );
