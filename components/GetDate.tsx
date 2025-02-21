@@ -3,5 +3,5 @@ type Props = {
 };
 
 export const GetDate = ({ date }: Props) => {
-    return <p>{new Date(date).toLocaleDateString()}</p>;
+    return <p>{new Date(date).toLocaleDateString("en-GB")}</p>;
 };
