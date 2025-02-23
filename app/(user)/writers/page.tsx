@@ -8,27 +8,20 @@ const query = groq`
 `;
 
 const sortWriters = (writers: Author[]) => {
-    const sortedWriters: Author[][] = [];
-    var currentLetter = writers[0].name[0];
-    var currentList = [writers[0]];
+    const groups: Record<string, Author[]> = {};
 
-    writers.shift();
+    writers.forEach((writer: Author) => {
+        const word = writer.name;
+        const firstLetter = word[0];
 
-    writers.forEach((writer) => {
-        const { name } = writer;
-        const firstLetter = name[0];
-
-        if (firstLetter === currentLetter) {
-            currentList.push(writer);
-            return;
+        if (!groups[firstLetter]) {
+            groups[firstLetter] = [];
         }
 
-        sortedWriters.push(currentList);
-        currentList = [writer];
-        currentLetter = firstLetter;
+        groups[firstLetter].push(writer);
     });
 
-    return sortedWriters;
+    return Object.values(groups);
 };
 
 export default async function Page() {

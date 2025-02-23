@@ -8,26 +8,20 @@ const query = groq`
 `;
 
 const sortCategories = (categories: Category[]) => {
-    const sortedCategories: Category[][] = [];
-    var currentLetter = categories[0].title[0];
-    var currentList = [categories[0]];
+    const groups: Record<string, Category[]> = {};
 
-    categories.shift();
+    categories.forEach((category: Category) => {
+        const word = category.title;
+        const firstLetter = word[0];
 
-    categories.forEach((category) => {
-        const { title } = category;
-        const firstLetter = title[0];
-
-        if (firstLetter === currentLetter) {
-            currentList.push(category);
-        } else {
-            sortedCategories.push(currentList);
-            currentList = [category];
-            currentLetter = firstLetter;
+        if (!groups[firstLetter]) {
+            groups[firstLetter] = [];
         }
+
+        groups[firstLetter].push(category);
     });
 
-    return sortedCategories;
+    return Object.values(groups);
 };
 
 export default async function Page() {
