@@ -14,7 +14,7 @@ const query = groq`
 export default async function Page({ params }: { params: { slug: string } }) {
     const { slug } = params;
 
-    const writer = slug.replace("-", " ");
+    const writer = slug.replace("-", " ").replace("%20", " ");
 
     const posts = await client.fetch<Post[]>(query, { writer });
 
