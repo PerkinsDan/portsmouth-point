@@ -1,3 +1,4 @@
+import { getEmailWhitelist } from "@/lib/sheetReader";
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { GoogleProfile } from "next-auth/providers/google";
@@ -12,13 +13,13 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async signIn({ account, profile }) {
             const userProfile = profile as GoogleProfile;
+            const emailWhitelist = await getEmailWhitelist();
+
             if (account?.provider === "google") {
                 return (
                     userProfile.email_verified &&
                     (userProfile.email.endsWith("@pgs.org.uk") ||
-                        process.env.EMAIL_WHITELIST!.includes(
-                            userProfile.email
-                        ))
+                        emailWhitelist.includes(userProfile.email))
                 );
             }
             return true; // Do different verification for other providers that don't have `email_verified`

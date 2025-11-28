@@ -5,6 +5,7 @@ import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import SignIn from "@/components/index/SignIn";
 import Footer from "@/components/Footer";
 import StudioButton from "@/components/studio/StudioButton";
+import { getAdminEmails } from "@/lib/sheetReader";
 
 export const metadata = {
     title: "Portsmouth Point",
@@ -18,6 +19,7 @@ type Props = {
 export default async function RootLayout({ children }: Props) {
     const session = await getServerSession(authOptions);
     const email = session?.user?.email || "";
+    const adminEmails = await getAdminEmails();
 
     return (
         <html lang="en">
@@ -28,9 +30,7 @@ export default async function RootLayout({ children }: Props) {
                     {session ? (
                         <div>
                             {children}{" "}
-                            {process.env.ADMIN_LIST?.includes(email) && (
-                                <StudioButton />
-                            )}
+                            {adminEmails.includes(email) && <StudioButton />}
                         </div>
                     ) : (
                         <SignIn />
