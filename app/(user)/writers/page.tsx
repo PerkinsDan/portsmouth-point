@@ -8,11 +8,21 @@ const query = groq`
 `;
 
 const sortWriters = (writers: Author[]) => {
+    writers.forEach(
+        (writer) =>
+            (writer.name = writer.name
+                .trim()
+                .split(" ")
+                .map((word) => word.toLowerCase())
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" "))
+    );
+    const sortedWriters = writers.sort((a, b) => a.name.localeCompare(b.name));
     const groups: Record<string, Author[]> = {};
 
-    writers.forEach((writer: Author) => {
-        const word = writer.name;
-        const firstLetter = word[0];
+    sortedWriters.forEach((writer: Author) => {
+        const name = writer.name.trim();
+        const firstLetter = name.charAt(0).toUpperCase();
 
         if (!groups[firstLetter]) {
             groups[firstLetter] = [];
@@ -26,7 +36,6 @@ const sortWriters = (writers: Author[]) => {
 
 export default async function Page() {
     const writers = await client.fetch<Author[]>(query);
-
     const sortedWriters = sortWriters(writers);
 
     return (
