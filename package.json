@@ -13,6 +13,7 @@
         "@portabletext/react": "^5.0.0",
         "@sanity/image-url": "^2.0.0",
         "@sanity/vision": "^4.19.0",
+        "glob": "^13.0.0",
         "googleapis": "^166.0.0",
         "next": "16.0.5",
         "next-auth": "^4.24.7",
