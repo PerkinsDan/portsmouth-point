@@ -24,7 +24,7 @@ type Props = {
 };
 
 export default async function Page({ params }: Props) {
-    const { slug } = params;
+    const { slug } = await params;
 
     const post = await client.fetch<Post>(query, { slug });
 

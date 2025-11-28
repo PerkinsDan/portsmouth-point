@@ -12,7 +12,7 @@ const query = groq`
 `;
 
 export default async function Page({ params }: { params: { slug: string } }) {
-    const { slug } = params;
+    const { slug } = await params;
 
     const category = slug.replaceAll("%20", " ").replaceAll("%26", "&");
 
