@@ -10,6 +10,6 @@ export const client = createClient({
     dataset,
     apiVersion,
     token,
-    useCdn: false,
+    useCdn: process.env.NODE_ENV === "production",
     perspective: "published",
 });
