@@ -19,7 +19,7 @@ const Page = () => {
                 <p>
                     The blog was launched in February 2012, first designed by{" "}
                     <b>Daniel Rollins</b>, redesigned by <b>Daniel Perkins</b>{" "}
-                    and edited by <b>Dan Frampton</b>.
+                    and edited by <b>J Digby</b> & <b>A Waterhouse</b>.
                 </p>
                 <Image
                     src="/portsmouthmag-cover.jpg"
