@@ -30,7 +30,8 @@ export const BlogList = ({ posts }: Props) => {
                                     {post.title}
                                 </h2>
                                 <p className="text-sm line-clamp-2">
-                                    {post.body[0].children[0].text}
+                                    {post.body?.[0]?.children?.[0]?.text ??
+                                        "No description"}
                                 </p>
                             </div>
                             <div className="flex items-center justify-between">
